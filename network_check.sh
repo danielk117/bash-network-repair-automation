@@ -12,7 +12,7 @@
 # If any of the ips responds, the network is considered functional.
 # A minimum of one ip is required, in the example below it shows how to check two different
 # gateways using a space character as delimiter.
-gateway_ips='1.1.1.1 8.8.8.8'
+gateway_ips='1.1.1.1 9.9.9.9'
 # Set nic to your Network card name, as seen in ip output.
 nic='wlan0'
 # Set network_check_threshold to the maximum number of failed checks that must fail
@@ -59,9 +59,9 @@ function restart_wlan {
     date_log "Network was not working for the previous $network_check_tries checks."
     date_log "Restarting $nic"
     # Trying wlan restart using ip command.
-    /sbin/ip link set "$nic" down
+    /sbin/ifconfig "$nic" down
     sleep 5
-    /sbin/ip link set "$nic" up
+    /sbin/ifconfig "$nic" up
     sleep 60
 
     check_gateways
